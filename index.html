@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#dbc4a2">
+  <title>Conchi & Sergio · 06.03.2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <main id="app">
+
+    <!-- PORTADA / PUERTAS -->
+    <section class="entrance" id="entrance" aria-label="Entrada a la boda">
+      <div class="entrance-background" aria-hidden="true">
+        <div class="mountain-layer"></div>
+        <div class="entrance-glow"></div>
+
+        <div class="reveal-content">
+          <p class="monogram">C <span>&amp;</span> S</p>
+          <h1>Conchi &amp; Sergio</h1>
+          <p class="date">06 · 03 · 2027</p>
+          <p class="tagline">¡Nos casamos!</p>
+        </div>
+      </div>
+
+      <div class="doors" id="doors">
+        <button class="door door--left" type="button" aria-label="Abrir invitación"></button>
+        <button class="door door--right" type="button" aria-label="Abrir invitación"></button>
+      </div>
+
+      <button class="open-button" id="openButton" type="button">
+        <span class="open-button__icon">✦</span>
+        <span>Toca para abrir</span>
+      </button>
+    </section>
+
+    <!-- HOME -->
+    <section class="home" id="home" aria-hidden="true">
+      <header class="hero">
+        <p class="hero__date">06 · 03 · 2027</p>
+        <h2>Conchi <span>&amp;</span> Sergio</h2>
+        <p>Bienvenidos a nuestro gran día</p>
+      </header>
+
+      <nav class="menu" aria-label="Información de la boda">
+        <a class="menu-card" href="#invitacion">
+          <span class="menu-card__icon">✉</span>
+          <span>
+            <strong>La invitación</strong>
+            <small>Un pedacito de nuestra historia</small>
+          </span>
+        </a>
+
+        <a class="menu-card" href="#boda">
+          <span class="menu-card__icon">⌖</span>
+          <span>
+            <strong>La boda</strong>
+            <small>Dónde estaremos y cómo llegar</small>
+          </span>
+        </a>
+
+        <a class="menu-card" href="#dia">
+          <span class="menu-card__icon">◷</span>
+          <span>
+            <strong>El día</strong>
+            <small>Todo lo que ocurrirá</small>
+          </span>
+        </a>
+
+        <a class="menu-card" href="#menu">
+          <span class="menu-card__icon">♧</span>
+          <span>
+            <strong>El menú</strong>
+            <small>Lo que hemos preparado para vosotros</small>
+          </span>
+        </a>
+
+        <a class="menu-card" href="#dresscode">
+          <span class="menu-card__icon">✧</span>
+          <span>
+            <strong>Dress code</strong>
+            <small>Una pequeña guía para el bodorrio</small>
+          </span>
+        </a>
+
+        <a class="menu-card" href="https://photos.app.goo.gl/dNABcMGMeyC4RzkK8" target="_blank" rel="noopener noreferrer">
+          <span class="menu-card__icon">▧</span>
+          <span>
+            <strong>Álbum</strong>
+            <small>Comparte y descubre nuestras fotos</small>
+          </span>
+        </a>
+      </nav>
+
+      <a class="rsvp" href="https://docs.google.com/forms/d/e/1FAIpQLScTw8RaUpifQoXJpc_rjD3cHVzClT2eEHlQMMsR7kpNb4SPkA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">
+        <span class="rsvp__icon">✓</span>
+        <span>
+          <strong>Confirma tu asistencia</strong>
+          <small>Nos hace mucha ilusión saber que vienes</small>
+        </span>
+      </a>
+
+      <section class="content-section" id="invitacion">
+        <p class="section-kicker">Nuestra historia</p>
+        <h3>La invitación</h3>
+        <p>Aquí colocaremos la invitación digital completa.</p>
+      </section>
+
+      <section class="content-section" id="boda">
+        <p class="section-kicker">El lugar</p>
+        <h3>La boda</h3>
+        <p>Aquí añadiremos ceremonia, celebración, mapa y cómo llegar.</p>
+      </section>
+
+      <section class="content-section" id="dia">
+        <p class="section-kicker">06 · 03 · 2027</p>
+        <h3>El día</h3>
+        <p>Aquí construiremos el timeline de la boda.</p>
+      </section>
+
+      <section class="content-section" id="menu">
+        <p class="section-kicker">Para disfrutar</p>
+        <h3>El menú</h3>
+        <p>Aquí añadiremos vuestro menú e información para alergias e intolerancias.</p>
+      </section>
+
+      <section class="content-section" id="dresscode">
+        <p class="section-kicker">Una pequeña guía</p>
+        <h3>Dress code</h3>
+        <p>Aquí pondremos vuestra guía de vestimenta.</p>
+      </section>
+
+      <footer class="footer">
+        <p>Con cariño</p>
+        <span>C &amp; S</span>
+        <p>06 · 03 · 2027</p>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

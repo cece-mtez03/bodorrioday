@@ -1,0 +1,535 @@
+/* =========================================================
+   BODORRIO DAY · Conchi & Sergio
+   HTML + CSS + JavaScript
+   ========================================================= */
+
+:root {
+  --paper: #dbc4a2;
+  --paper-light: #f1e3c7;
+  --paper-bright: #f7f0e2;
+  --ink: #3f4233;
+  --ink-soft: #747360;
+  --line: rgba(63, 66, 51, 0.28);
+  --white: #fffaf0;
+  --door-shadow: rgba(45, 44, 31, 0.18);
+  --ease-door: cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+/* ---------- Reset ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Montserrat", Arial, sans-serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- Entrada ---------- */
+
+.entrance {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 520px;
+  overflow: hidden;
+  background: var(--paper-light);
+  isolation: isolate;
+}
+
+.entrance-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.58), transparent 38%),
+    var(--paper-light);
+}
+
+/*
+ * Esta capa está separada de las puertas.
+ * Aquí podremos colocar posteriormente el paisaje de fondo
+ * definitivo sin modificar la animación de las hojas.
+ */
+.mountain-layer {
+  position: absolute;
+  left: 50%;
+  bottom: -2%;
+  width: min(100%, 1500px);
+  height: 48%;
+  transform: translateX(-50%);
+  opacity: 0.22;
+  background:
+    linear-gradient(
+      160deg,
+      transparent 0 24%,
+      rgba(63, 66, 51, 0.16) 24.2% 25%,
+      transparent 25.2% 39%,
+      rgba(63, 66, 51, 0.12) 39.2% 40%,
+      transparent 40.2%
+    );
+  clip-path: polygon(
+    0 72%, 9% 58%, 17% 68%, 28% 39%, 38% 61%,
+    49% 35%, 58% 60%, 68% 44%, 78% 64%, 88% 50%,
+    100% 70%, 100% 100%, 0 100%
+  );
+  pointer-events: none;
+}
+
+.entrance-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(255, 250, 235, 0.72), transparent 28%),
+    linear-gradient(to bottom, transparent 58%, rgba(63, 66, 51, 0.08));
+  pointer-events: none;
+}
+
+.reveal-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 24px;
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity 1s ease 0.65s,
+    transform 1.15s ease 0.65s;
+}
+
+.entrance.is-open .reveal-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.monogram {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(80px, 15vw, 150px);
+  line-height: 0.8;
+  letter-spacing: 0.04em;
+}
+
+.monogram span {
+  font-size: 0.52em;
+  vertical-align: middle;
+}
+
+.reveal-content h1 {
+  margin: 28px 0 8px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(30px, 5vw, 58px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.date {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.25em;
+}
+
+.tagline {
+  margin: 18px 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 23px;
+}
+
+/* ---------- Puertas ---------- */
+
+.doors {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  perspective: 1800px;
+  transform-style: preserve-3d;
+}
+
+.door {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--paper-light);
+  background-image: url("../assets/doors-horizontal.png");
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  box-shadow:
+    inset 0 0 50px rgba(63, 66, 51, 0.08),
+    0 0 30px var(--door-shadow);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition:
+    transform 1.5s var(--ease-door),
+    filter 0.6s ease;
+}
+
+.door::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.08),
+    transparent 45%,
+    rgba(0,0,0,0.04)
+  );
+  pointer-events: none;
+}
+
+.door--left {
+  background-position: left center;
+  transform-origin: left center;
+}
+
+.door--right {
+  background-position: right center;
+  transform-origin: right center;
+}
+
+.doors::after {
+  content: "";
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: rgba(63, 66, 51, 0.24);
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.entrance.is-open .door--left {
+  transform: rotateY(-108deg);
+}
+
+.entrance.is-open .door--right {
+  transform: rotateY(108deg);
+}
+
+.entrance.is-open .doors {
+  pointer-events: none;
+}
+
+.entrance.is-open .doors::after {
+  opacity: 0;
+}
+
+/* ---------- Botón de apertura ---------- */
+
+.open-button {
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  bottom: max(32px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: rgba(241, 227, 199, 0.82);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 5px 20px rgba(63, 66, 51, 0.08);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.open-button:hover {
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.open-button__icon {
+  font-size: 15px;
+}
+
+.entrance.is-open .open-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- Home ---------- */
+
+.home {
+  display: block;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 75px 22px 50px;
+  opacity: 0;
+  transform: translateY(25px);
+  pointer-events: none;
+  transition:
+    opacity 0.8s ease 1.25s,
+    transform 0.9s ease 1.25s;
+}
+
+.home.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.hero {
+  padding: 15px 0 35px;
+  text-align: center;
+}
+
+.hero__date {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+}
+
+.hero h2 {
+  margin: 10px 0 5px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(50px, 10vw, 78px);
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.hero h2 span {
+  font-size: 0.7em;
+}
+
+.hero > p:last-child {
+  margin: 16px 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 21px;
+}
+
+/* ---------- Menú ---------- */
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.menu-card {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  min-height: 86px;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(241, 227, 199, 0.72);
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-2px);
+  background: rgba(247, 240, 226, 0.8);
+  box-shadow: 0 8px 20px rgba(63, 66, 51, 0.08);
+}
+
+.menu-card__icon {
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+}
+
+.menu-card strong {
+  display: block;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.menu-card small {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-soft);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+/* ---------- RSVP ---------- */
+
+.rsvp {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 16px 0 55px;
+  padding: 18px 20px;
+  border-radius: 4px;
+  color: var(--white);
+  background: var(--ink);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rsvp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(63, 66, 51, 0.18);
+}
+
+.rsvp__icon {
+  font-size: 27px;
+}
+
+.rsvp strong {
+  display: block;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 25px;
+}
+
+.rsvp small {
+  display: block;
+  margin-top: 3px;
+  opacity: 0.78;
+  font-size: 10px;
+}
+
+/* ---------- Secciones ---------- */
+
+.content-section {
+  margin-top: 55px;
+  padding: 42px 4px 0;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 20px;
+}
+
+.section-kicker {
+  margin: 0 0 5px;
+  color: var(--ink-soft);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.content-section h3 {
+  margin: 0 0 8px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.content-section > p:last-child {
+  max-width: 600px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  margin-top: 80px;
+  padding-top: 25px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 18px;
+}
+
+.footer p {
+  margin: 5px 0;
+}
+
+.footer span {
+  font-size: 35px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 680px) {
+  .entrance {
+    min-height: 100svh;
+  }
+
+  /*
+   * En móvil mantenemos la imagen completa dentro del ancho disponible
+   * sin deformarla. La composición se centra y se recorta verticalmente
+   * si el viewport es muy alto.
+   */
+  .door {
+    background-size: auto 100%;
+  }
+
+  .door--left {
+    background-position: left center;
+  }
+
+  .door--right {
+    background-position: right center;
+  }
+
+  .menu {
+    grid-template-columns: 1fr;
+  }
+
+  .home {
+    padding-top: 55px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .open-button {
+    bottom: 16px;
+  }
+
+  .reveal-content {
+    transform: scale(0.82);
+  }
+
+  .entrance.is-open .reveal-content {
+    transform: scale(0.88);
+  }
+}
+
+/* ---------- Accesibilidad ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .door,
+  .reveal-content,
+  .open-button,
+  .home {
+    transition: none;
+  }
+}
